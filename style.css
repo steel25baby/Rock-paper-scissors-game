@@ -14,7 +14,7 @@ body{
 .mother{
   background-color: #9ec91e;
   width: 50%;
-  height: 110%;
+  min-height: 100vh;
 
 }
 @media screen  and (max-width: 912px) {

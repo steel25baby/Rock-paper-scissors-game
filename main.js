@@ -1,35 +1,47 @@
-function computerPlay() {
-  const choices = ["rock", "paper", "scissors"];
-  const randomIndex = Math.floor(Math.random() * choices.length);
-  return choices[randomIndex];
+document.addEventListener('DOMContentLoaded', () => {
+  const choices = document.querySelectorAll('.choice-emoji div');
+  const compEmoji = document.querySelector('.comp-emoji h1');
+  const playerEmoji = document.querySelector('.play-emoji h1');
+  const result = document.querySelector('.results h3');
+  const scores = document.querySelector('.scores');
+  let compScore = 0;
+  let playerScore = 0;
+  
+  // Generate Computer's choice
+  function getComputerChoice() {
+  const randomNumber = Math.floor(Math.random() * 3);
+  return choices[randomNumber].querySelector('p').textContent;
   }
   
-  function playRound(playerSelection, computerSelection) {
-  if (playerSelection === computerSelection) {
-  return "It's a tie! You both chose " + playerSelection + ".";
+  // Compare choices and update result
+  function updateResult(playerChoice, computerChoice) {
+  if (playerChoice === computerChoice) {
+  result.textContent = 'draw';
   } else if (
-  (playerSelection === "rock" && computerSelection === "scissors") ||
-  (playerSelection === "scissors" && computerSelection === "paper") ||
-  (playerSelection === "paper" && computerSelection === "rock")
+  (playerChoice === 'rock' && computerChoice === 'scissors') ||
+  (playerChoice === 'paper' && computerChoice === 'rock') ||
+  (playerChoice === 'scissors' && computerChoice === 'paper')
   ) {
-  return "You win! " + playerSelection + " beats " + computerSelection + ".";
+  playerScore++;
+  result.textContent = 'player wins';
   } else {
-  return "Computer wins! " + computerSelection + " beats " + playerSelection + ".";
-  }
-  }
-  
-  function game() {
-  // let playerSelection = prompt("Select: rock, paper, or scissors").toLowerCase();
-  if (!["rock", "paper", "scissors"].includes(playerSelection)) {
-  console.log("Invalid selection. Please choose rock, paper, or scissors.");
-  return;
+  compScore++;
+  result.textContent = 'computer wins';
   }
   
-  const computerSelection = computerPlay();
-  console.log("Computer chose: " + computerSelection);
-  
-  console.log(playRound(playerSelection, computerSelection));
+  scores.textContent = `computer ${compScore} - ${playerScore} player`;
   }
   
-  // Play a single round of the game
-  game();
+  // Play the game
+  choices.forEach(choice => {
+  choice.addEventListener('click', () => {
+  const playerChoice = choice.querySelector('p').textContent;
+  const computerChoice = getComputerChoice();
+  
+  compEmoji.textContent = computerChoice === 'rock' ? '✊' : (computerChoice === 'paper') ? '✋' : '✌️';
+  playerEmoji.textContent = playerChoice === 'rock' ? '✊' : (playerChoice === 'paper') ? '✋' : '✌️';
+  
+  updateResult(playerChoice, computerChoice);
+  });
+  });
+  });
