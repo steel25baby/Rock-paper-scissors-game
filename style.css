@@ -59,13 +59,18 @@ align-items: center;
   margin-bottom: 10px;
 }
 .comp .comp-emoji{
-  border: 2px dashed black;
+  border: 2px dashed black; 
   width: 20%;
   height: 20%;
 }
 .comp .comp-emoji h1{
   text-align: center;
   font-size: 100px;
+}
+@media screen and (max-width: 37.5em){
+  .comp .comp-emoji h1{
+    font-size: 60px;
+  }
 }
 /* results section */
 .results{
@@ -103,6 +108,11 @@ align-items: center;
 .player .play-emoji h1{
   text-align: center;
   font-size: 100px;
+}
+@media screen and (max-width: 37.5em){
+.player .play-emoji h1{
+  font-size: 60px;
+}
 }
 
 /* choices section */
